@@ -15,11 +15,13 @@ export default {
 </script>
 <style>
 #app {
-  font-family: Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+  background-color: black;
+  background-repeat: no-repeat;
+  background-size: cover;
+  object-fit: cover;
+  z-index: 1;
+
+  height: 100vh !important;
 }
 
 #nav {
@@ -28,10 +30,10 @@ export default {
 
 #nav a {
   font-weight: bold;
-  color: #2c3e50;
+  color: #222224;
 }
 
 #nav a.router-link-exact-active {
-  color: #42b983;
+  color: #ee1515;
 }
 </style>
