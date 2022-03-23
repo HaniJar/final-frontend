@@ -1,63 +1,78 @@
 <template>
-  <!-- Start Main Container -->
-  <div class="main-container">
-    <!-- Start Pokemon Ball Top Part -->
-    <div class="pokemon-top-part"></div>
-
-    <div class="main-forms">
-      <div class="signup-form">
-        <form
-          class="sign-back"
-          @submit.prevent="handleRegister"
-          :validation-schema="schema"
-        >
-          <h1>sign UP</h1>
-          <div class="signup-row">
-            <i class="fa fa-user"></i>
-            <input type="text" name="" value="" placeholder="FULL NAME" />
-          </div>
-          <div class="signup-row">
-            <i class="fa fa-envelope-o"></i>
-            <input type="text" name="" value="" placeholder="EMAIL" />
-          </div>
-          <div class="signup-row">
-            <i class="fa fa-phone"></i>
-            <input type="text" name="" value="" placeholder="MOBILE" />
-          </div>
-          <div class="signup-row">
-            <i class="fa fa-key"></i>
-            <input type="password" name="" value="" placeholder="PASSWORD" />
-          </div>
-          <div class="signup-row">
-            <a href="#">
-              <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>
-            </a>
-          </div>
-          <button class="btn btn-primary btn-" :disabled="loading">
-            <span
-              v-show="loading"
-              class="spinner-border spinner-border-sm"
-            ></span>
-            <span>Register</span>
-          </button>
-          <div class="form-bottom">
-            <div class="remember">
-              <a href="/login">Already Have Account?</a>
+  <div class="containers">
+    <div class="column">
+      <h1 class="text-light">WELCOME TO ELECTRONIC DEPARTMENT STORE</h1>
+      <div id="register">
+        <img
+          id="profile-img"
+          src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
+          class="profile-img-card"
+        />
+        <Form @submit="handleRegister">
+          <div v-if="!successful">
+            <div class="form-group">
+              <label for="fullname"></label>
+              <Field
+                name="fullname"
+                placeholder="Fullname"
+                class="form-control"
+              />
+              <ErrorMessage name="fullname" class="error-feedback" />
             </div>
+            <div class="form-group">
+              <label for="email"></label>
+              <Field
+                name="email"
+                placeholder="email address"
+                class="form-control"
+                type="email"
+              />
+              <ErrorMessage name="email" class="error-feedback" />
+            </div>
+            <div class="form-group">
+              <label for="phone_number"></label>
+              <Field
+                name="phone_number"
+                class="form-control"
+                placeholder="Phone Number"
+                type="number"
+              />
+              <ErrorMessage name="phone_number" class="error-feedback" />
+            </div>
+
+            <div class="form-group">
+              <label for="password"></label>
+              <Field
+                name="password"
+                class="form-control"
+                placeholder="Password"
+                type="password"
+              />
+              <ErrorMessage name="password" class="error-feedback" />
+            </div>
+            <button class="btn btn-primary btn-" :disabled="loading">
+              <span
+                v-show="loading"
+                class="spinner-border spinner-border-sm"
+              ></span>
+              <span>Register</span>
+            </button>
+            <br />
+            <p style="color: black" class="login">
+              Already a member? <a href="/login">Sign In</a>
+            </p>
           </div>
-        </form>
+        </Form>
+        <div
+          v-if="message"
+          class="alert"
+          :class="successful ? 'alert-success' : 'alert-danger'"
+        >
+          {{ message }}
+        </div>
       </div>
     </div>
-    <!-- End Main Forms -->
-    <!-- Start Pokemon Ball Bottom Part -->
-    <div class="pokemon-bottom-part">
-      <div class="white-part"></div>
-      <div class="black-line"></div>
-    </div>
-    <!-- End Pokemon Ball Bottom Part -->
   </div>
-  <!-- End Main Container -->
-  <!-- Start Scripts -->
 </template>
 
 <script>
@@ -105,54 +120,12 @@ export default {
   },
   mounted() {
     if (this.loggedIn) {
-      this.$router.push("/profile");
-    }
-    {
-      var blackLine = ".black-line",
-        ball = ".main-container",
-        mainForm = ".main-forms",
-        top = ".pokemon-top-part",
-        bottom = ".pokemon-bottom-part",
-        h = ".sign-back h1",
-        row = ".signup-row",
-        arrow = ".signup-row a",
-        rem = ".remember",
-        tl = new TimelineMax();
-
-      // Start
-      tl.to(blackLine, 0.1, { className: "+=red-circle" })
-        .to(blackLine, 0.1, { className: "-=red-circle" })
-        .to(blackLine, 0.1, { className: "+=red-circle" })
-        .to(blackLine, 0.1, { className: "-=red-circle" })
-        .to(blackLine, 0.1, { className: "+=red-circle" })
-        .to(blackLine, 0.1, { className: "-=red-circle" })
-        .to(blackLine, 0.1, { className: "+=red-circle" })
-        .to(blackLine, 0.1, { className: "-=red-circle" })
-        .to(ball, 0.1, { y: "-70%", ease: Power4.easeOut })
-        .to(ball, 0.1, { y: "-50%", ease: Bounce.easeOut })
-        .to(ball, 0.1, { y: "-85%", ease: Power4.easeOut }, "+=0.5")
-        .to(ball, 0.1, { y: "-50%", ease: Bounce.easeOut })
-        .to(ball, 0.1, { y: "-100%", ease: Power4.easeOut }, "+=0.5")
-        .to(ball, 0.1, { y: "-50%", ease: Bounce.easeOut, onComplete: toggle });
-      function toggle(o) {
-        $(".main-forms").slideDown(1500);
-        tl.to(top, 1, { autoAlpha: 0 })
-          .to(bottom, 1, { autoAlpha: 0 }, "-=1")
-          .fromTo(
-            h,
-            1,
-            { autoAlpha: 0, y: -20 },
-            { autoAlpha: 1, y: 0 },
-            "+=0.5"
-          )
-          .staggerFrom(row, 1, { left: "-100%", autoAlpha: 0 }, 0.2)
-          .staggerFrom(rem, 1, { cycle: { y: [20, -20] }, autoAlpha: 0 }, 0.2);
-      }
+      this.$router.push("/login");
     }
   },
   methods: {
     handleRegister(user) {
-      console.log("we made it");
+      console.log("Successfully registered");
       this.message = "";
       this.successful = false;
       this.loading = true;
@@ -181,186 +154,29 @@ export default {
 </script>
 
 <style scoped>
-html {
-  height: 100vh;
+#register {
+  border: 5px solid black;
+  width: 35%;
+  margin-right: auto;
+  margin-left: auto;
+  padding: 20px;
 }
-
-body {
-  font-family: "Ubuntu", sans-serif;
-  background: url("https://lh3.googleusercontent.com/ohXfK_gejGdGoxN7Vzf2hE9EWsvXhR9AnPlRqylsbhSFn1hU2pDZ4dkG8Q8Wj8cd4g9hVGShd2X7qBSTkbWiX-2UmhH44u_-M4xpO2nMBYsi0ymKeMpfZFOMWXtTJW28YdTjVquwquv9pTTCBFpTnG_C8euEUgO08mXO63oDcqIN9bmSvh5B8MUDw2MJ_oYAMJoCi8UeI9nvfs7z3UbcQQPNYHyXgi0wKW9aMmz8ogaRUPHf5Z7tKv9Am8my9XsleXNzeZjlTY7qobFffw5xwpNBUGNYdPWfkF-XWQyhrcJsESwGFHUlFDtVvU_V6IOgHA-jZmnmu8e3_wBA50VTO713U-DoDMjhZliK1qSUoR9FBxcPE7Z_O3kVk9v5qFUgwO2wmybVKDmH9gn55vDnBEiHCr-0cfKJgJHYlgIFm3fwguGYtIEpYK5ucGAxjz_NPcM5fw9BNQ-M67dyM5eY9Tdav198oMNTAJLKGmdaEG4v8UqRsxk5hyFhOWeufn6vuaG2TrxB9_kDR5gaYroneuDaYB9CySvKyXo_AmqA3po7mGl8W0HBphFHzOPkfFqyGdpTfeJNurtKuuV99cb57kHxwieMwWCPwUNRFzZwOByzNyfcPkeVMgy8z7tpYj6Eb9SUpt8Y-6j9-Qj9lfxnHJNTZ0CTzxvJ-N_Mwya-YA=w1135-h638-no")
-    no-repeat;
-  background-size: cover;
-  height: 100vh;
-  margin: 0;
-  overflow: hidden;
+#register input {
+  margin: 20px;
+  border: none;
+  border-bottom: 2px solid black;
+  background-color: transparent;
 }
-
-.main-container {
-  width: 500px;
-  margin: 0 auto;
-  position: absolute;
-  top: 80%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+.login a {
+  color: red;
+  transition: 0.3s;
 }
-
-.pokemon-top-part {
-  width: 200px;
-  height: 100px;
-  background: #f22613;
-  margin: 0 auto;
-  border-radius: 200px 200px 0 0;
-  border: 5px solid #333;
+.login a:hover {
+  color: rgb(73, 73, 73);
+  transition: 0.3s;
 }
-
-.pokemon-bottom-part {
-  position: relative;
-}
-
-.white-part {
-  width: 200px;
-  height: 100px;
-  background: #ffffff;
-  margin: 0 auto;
-  border-radius: 0 0 200px 200px;
-  border: 5px solid #333;
-}
-
-.black-line {
-  width: 210px;
-  height: 25px;
-  background: #333;
-  margin: 0 auto;
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.black-line::after {
-  content: "";
-  width: 50px;
-  height: 50px;
-  background: #333;
-  border-radius: 50%;
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translate(-50%, -25%);
-}
-
-.black-line::before {
-  content: "";
-  width: 30px;
-  height: 30px;
-  background: #fff;
-  border-radius: 50%;
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translate(-50%, -2px);
-  z-index: 999;
-}
-
-.signup-form {
-  background: url("https://lh3.googleusercontent.com/6ObGgH3qiiOYrkZyd2dsxvvaulkjw2h-RF-I9764grYVGxz6dM_SYOW7EfUkvTIgUxtKOmpnYBrH0tDkJvsoYGLPYtAfgs_hM06Oyxo2QyiB19nNAOA0lqgQAX5Pf1i7qjCCN54cJnGW3jsmA2YbhHaL3cMSdKY8hzOk7QGXxyAALPANU-aQs88FlS9RT8uaL59K4yhFFHBhZzTZ9aj3dWxgrT0FRJy5fQJjM6qEZTnsrAc9cstFsyyYX7tHSQasMc9ER7ypAQjPHqj9gxEjLz4DDPFgY4vBx_3XgQ-fD5QdxCR3N5XuxFfovbeKwI2sPCfr4uP2IhNW684qPHD2uH1GCE1FQ8JZt8IXpsNevzVE0yNOmFGcHa064wGkTPCtjTQcZ0Y6KOnqBUDfKWqt5UkkKGz_C5QM3sDuMUHa6cNmwejLkF-RDrWNnPr_-6MYIziztw7ExYZYJ71HWEyPNRqREeSO6wgw2O38OyzTwE_eJ4K0KOYyqVGL8Jw9tn6bKpLJsoVtQ17rXg0N57uG41Jqa-P5q8AltDWmsePSzBstx5pAFbcrRkizwESHAlV_JnsYcNeIFUZTOSKDxZuvlafr9PVK3dbIdEp1EHz6QnM_6MCXRSaaP3Nu9FocxRd_nlOGDG1X-_sBpXLsmooM7bGmopx1HzUux9ROKzPyJg=w1135-h638-no")
-    no-repeat;
-  background-size: cover;
-  border-radius: 10px;
-}
-
-.sign-back {
-  background: linear-gradient(rgba(255, 202, 0, 0.4), #ffca00 60%);
-  border-radius: 10px;
-  padding: 65px 0;
-}
-
-.sign-back h1 {
-  text-transform: uppercase;
-  text-align: center;
+.form-control {
   color: #fff;
-  margin-top: 0;
-  letter-spacing: 5px;
-  text-shadow: 1px 1px 1px #333;
-}
-
-.signup-row {
-  text-align: center;
-  margin: 20px 0;
-  position: relative;
-}
-
-.signup-row input {
-  padding: 5px 0;
-  border: 0;
-  border-bottom: 1px solid #fff;
-  background: transparent;
-  width: 50%;
-  text-align: center;
-  outline: none;
-  color: #fff;
-  font-family: "Ubuntu", sans-serif;
-}
-
-.signup-row input::-webkit-input-placeholder {
-  color: #fff;
-  text-shadow: 1px 1px 1px rgba(51, 51, 51, 0.6);
-}
-
-.signup-row i {
-  color: #fff;
-  position: relative;
-  left: 20px;
-  text-shadow: 1px 1px 1px rgba(51, 51, 51, 0.6);
-}
-
-.signup-row a {
-  font-size: 40px;
-  text-decoration: none;
-}
-
-.signup-row a i {
-  left: 0;
-}
-
-.form-bottom {
-  display: flex;
-  justify-content: center;
-}
-
-.remember:not(:last-child) {
-  margin-right: 30px;
-  color: #af942d;
-}
-.remember:not(:last-child):hover {
-  margin-right: 30px;
-  color: #fff;
-  transition: all 500ms;
-}
-
-.remember a {
-  text-decoration: none;
-  color: #af942d;
-  transition: all 500ms;
-}
-.remember a:hover {
-  text-decoration: none;
-  color: #fff;
-}
-
-input[type="checkbox"] {
-  position: relative;
-  top: 1px;
-  transition: all 500ms;
-}
-
-.main-forms {
-  overflow: hidden;
-  display: none;
-  position: relative;
-}
-
-.red-circle::before {
-  background: #f22613;
+  font-size: 20px;
 }
 </style>

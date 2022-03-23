@@ -52,6 +52,11 @@ const routes = [
     name: "Admin",
     component: Admin,
   },
+  // {
+  //   path: "/dashboard",
+  //   name: "Dashboard",
+  //   component: Dashboard,
+  // },
   {
     path: "/contact",
     name: "Contact",
