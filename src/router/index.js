@@ -7,6 +7,7 @@ import Products from "@/views/Products.vue";
 import Cart from "@/views/Cart.vue";
 import Profile from "@/views/Profile.vue";
 import Admin from "@/views/Admin.vue";
+import Dashboard from "@/views/Dashboard.vue";
 import Contact from "@/views/Contact.vue";
 const routes = [
   {
@@ -52,11 +53,11 @@ const routes = [
     name: "Admin",
     component: Admin,
   },
-  // {
-  //   path: "/dashboard",
-  //   name: "Dashboard",
-  //   component: Dashboard,
-  // },
+  {
+    path: "/dashboard",
+    name: "Dashboard",
+    component: Dashboard,
+  },
   {
     path: "/contact",
     name: "Contact",

@@ -34,8 +34,19 @@
         <MDBNavbarItem router-link v-if="currentUser" :to="{ name: 'Profile' }">
           Profile
         </MDBNavbarItem>
-        <MDBNavbarItem router-link v-if="currentUser" :to="{ name: 'Admin' }">
+        <MDBNavbarItem
+          router-link
+          v-if="showAdminBoard"
+          :to="{ name: 'Admin' }"
+        >
           Admin
+        </MDBNavbarItem>
+        <MDBNavbarItem
+          router-link
+          v-if="showAdminBoard"
+          :to="{ name: 'Dashboard' }"
+        >
+          Dashboard
         </MDBNavbarItem>
         <MDBNavbarItem router-link :to="{ name: 'Contact' }">
           Contact

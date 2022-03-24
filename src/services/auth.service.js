@@ -3,7 +3,7 @@ const API_URL = "https://final-backend1.herokuapp.com/users/";
 class AuthService {
   login(user) {
     return axios
-      .post(API_URL + "signin", {
+      .patch(API_URL + "signin", {
         fullname: user.fullname,
         password: user.password,
       })

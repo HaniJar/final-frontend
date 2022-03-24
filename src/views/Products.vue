@@ -69,6 +69,13 @@
                 >
                   Add to cart
                 </button>
+                <button
+                  type="button"
+                  class="btn btncolor"
+                  @click="viewProduct(products._id)"
+                >
+                  View Product
+                </button>
               </div>
             </div>
           </div>

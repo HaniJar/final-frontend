@@ -1,115 +1,149 @@
 <template>
-  <form @submit.prevent="login" class="form neu-border">
-    <h2 class="form-heading">Login</h2>
-    <h5>Log in to your account now</h5>
-    <input
-      class="form-input neu-border-inset"
-      type="fullname"
-      v-model="fullname"
-      placeholder="Fullname"
-    />
-    <input
-      class="form-input neu-border-inset"
-      type="password"
-      v-model="password"
-      placeholder="Password"
-    />
-    <button type="submit" class="form-btn neu-border">Sign in</button>
-
-    <p>
-      Not a member?
-      <router-link :to="{ name: 'Register' }">Create an account</router-link>
-    </p>
-  </form>
+  <div class="containers">
+    <div class="column">
+      <h1 style="color: white">WELCOME BACK PLEASE LOG IN</h1>
+      <div id="login" class="mt-5">
+        <img
+          id="profile-img"
+          src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
+          class="profile-img-card"
+        />
+        <Form @submit="handleLogin" :validation-schema="schema">
+          <div class="form-group">
+            <label for="fullname"></label>
+            <Field
+              name="fullname"
+              type="text"
+              class="form-control"
+              placeholder="Fullname"
+            />
+            <ErrorMessage name="fullname" class="error-feedback" />
+          </div>
+          <div class="form-group">
+            <label for="password"></label>
+            <Field
+              name="password"
+              type="password"
+              class="form-control"
+              placeholder="Password"
+            />
+            <ErrorMessage name="password" class="error-feedback" />
+          </div>
+          <div class="form-group">
+            <button class="btn btn-primary m-3" :disabled="loading">
+              <span
+                v-show="loading"
+                class="spinner-border spinner-border-sm"
+              ></span>
+              <span>Login</span>
+            </button>
+            <br />
+            <p style="color: black" class="register">
+              Not a member? <a href="/register">Create an account</a>
+            </p>
+          </div>
+          <div class="form-group">
+            <div v-if="message" class="alert alert-danger" role="alert">
+              {{ message }}
+            </div>
+          </div>
+        </Form>
+      </div>
+      <!-- </div> -->
+    </div>
+  </div>
 </template>
 
 <script>
+import { Form, Field, ErrorMessage } from "vee-validate";
+import * as yup from "yup";
+
 export default {
+  name: "Login",
+  components: {
+    Form,
+    Field,
+    ErrorMessage,
+  },
   data() {
+    const schema = yup.object().shape({
+      fullname: yup.string().required("username is required"),
+      password: yup.string().required("Password is required"),
+    });
     return {
-      fullname: "",
-      password: "",
+      loading: false,
+      message: "",
+      schema,
     };
   },
+  computed: {
+    loggedIn() {
+      return this.$store.state.auth.status.loggedIn;
+    },
+  },
+  created() {
+    if (this.loggedIn) {
+      this.$router.push("/profile");
+    }
+  },
   methods: {
-    login() {
-      fetch("https://final-backend1.herokuapp.com/users/signin", {
-        method: "PATCH",
-        body: JSON.stringify({
-          fullname: this.fullname,
-          password: this.password,
-        }),
-        headers: {
-          "Content-type": "application/json; charset=UTF-8",
+    handleLogin(user) {
+      this.loading = true;
+      this.$store.dispatch("auth/login", user).then(
+        () => {
+          this.$router.push("/profile");
         },
-      })
-        .then((response) => response.json())
-        .then((json) => {
-          localStorage.setItem("jwt", json.jwt);
-          alert("User logged in");
-          this.$router.push({ name: "Profile" });
-        })
-        .catch((err) => {
-          alert(err);
-        });
+        (error) => {
+          this.loading = false;
+          this.message =
+            (error.response &&
+              error.response.data &&
+              error.response.data.message) ||
+            error.message ||
+            error.toString();
+        }
+      );
     },
   },
 };
 </script>
 
 <style>
-body {
-  background: linear-gradient(0deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-    url("https://images.pexels.com/photos/5709615/pexels-photo-5709615.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
-}
-.neu-border {
-  border-radius: 30px;
-}
-.neu-border-inset {
-  border-radius: 30px;
-}
-
-.form {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 40px;
-  gap: 20px;
-  width: 100%;
-  margin-inline: auto;
-  max-width: 600px;
-  margin-top: 200px;
-  background-color: rgb(0, 195, 255);
-}
-
-.form-heading {
-  text-align: center;
-  text-transform: uppercase;
-}
-
-.form-input,
-.form-btn {
-  border: none;
-  outline: none;
+#login {
+  border: 5px solid black;
+  width: 35%;
+  margin-right: auto;
+  margin-left: auto;
   padding: 20px;
 }
-
-.form-btn {
-  cursor: pointer;
-  transition: all 0.1s linear;
+#login input {
+  margin: 20px;
+  border: none;
+  border-bottom: 2px solid black;
+  background-color: transparent;
 }
-
-.form-btn:hover {
-  transform: scale(1.05);
+.register a {
+  color: red;
+  transition: 0.3s;
 }
-
-.form-social-login {
-  display: flex;
-  justify-content: space-between;
+.register a:hover {
+  color: rgb(73, 73, 73);
+  transition: 0.3s;
 }
-
-.form-social-btn {
-  width: 45%;
-  color: #333;
+::placeholder {
+  color: #fff;
+  font-size: 20px;
+}
+.profile-img-card {
+  width: 96px;
+  height: 96px;
+  margin: 0 auto 10px;
+  display: block;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+}
+.column {
+  height: 85vh;
 }
 </style>
