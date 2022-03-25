@@ -1,7 +1,7 @@
 <template>
   <div class="containers">
     <div class="column">
-      <h1 style="color: white">WELCOME BACK PLEASE LOG IN</h1>
+      <h1 id="yeh" style="color: white">WELCOME BACK PLEASE LOG IN</h1>
       <div id="login" class="mt-5">
         <img
           id="profile-img"
@@ -38,7 +38,7 @@
               <span>Login</span>
             </button>
             <br />
-            <p style="color: black" class="register">
+            <p style="color: white" class="register">
               Not a member? <a href="/register">Create an account</a>
             </p>
           </div>
@@ -57,7 +57,6 @@
 <script>
 import { Form, Field, ErrorMessage } from "vee-validate";
 import * as yup from "yup";
-
 export default {
   name: "Login",
   components: {
@@ -83,7 +82,7 @@ export default {
   },
   created() {
     if (this.loggedIn) {
-      this.$router.push("/profile");
+      this.$router.push("/products");
     }
   },
   methods: {
@@ -91,7 +90,7 @@ export default {
       this.loading = true;
       this.$store.dispatch("auth/login", user).then(
         () => {
-          this.$router.push("/profile");
+          this.$router.push("/products");
         },
         (error) => {
           this.loading = false;
@@ -110,7 +109,7 @@ export default {
 
 <style>
 #login {
-  border: 5px solid black;
+  border: 5px solid rgb(212, 26, 26);
   width: 35%;
   margin-right: auto;
   margin-left: auto;
@@ -145,5 +144,8 @@ export default {
 }
 .column {
   height: 85vh;
+}
+#yeh {
+  text-align: center;
 }
 </style>

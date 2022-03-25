@@ -83,7 +83,7 @@ export default {
 }
 .neu-border-inset {
   border-radius: 30px;
-  background: #8817178e;
+  background: #000000c2;
 }
 
 .form {
@@ -96,7 +96,7 @@ export default {
   max-width: 600px;
   margin-inline: auto;
   margin-top: 70px;
-  background-color: rgb(0, 0, 0);
+  background-color: rgb(192, 27, 27);
   margin-bottom: 70px;
 }
 
@@ -129,7 +129,7 @@ export default {
 
 .form-social-btn {
   width: 45%;
-  color: #333;
+  color: rgb(255, 255, 255);
 }
 
 .form-btn neu-border {
@@ -137,4 +137,10 @@ export default {
   background: #000000;
   box-shadow: inset 8px 8px 15px #e4e4e4, inset -8px -8px 15px #ffffff;
 }
+/* h5,
+h2,
+p,
+a {
+  background-color: rgb(192, 27, 27);
+} */
 </style>

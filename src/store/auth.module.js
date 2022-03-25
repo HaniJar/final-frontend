@@ -26,7 +26,7 @@ export const auth = {
     register({ commit }, user) {
       return AuthService.register(user).then(
         (response) => {
-          commit("registerSuccess");
+          commit("registerSuccess", user);
           return Promise.resolve(response.data);
         },
         (error) => {
@@ -40,6 +40,7 @@ export const auth = {
     loginSuccess(state, user) {
       state.status.loggedIn = true;
       state.user = user;
+      localStorage.setItem("user", JSON.stringify(user));
     },
     loginFailure(state) {
       state.status.loggedIn = false;
@@ -51,6 +52,7 @@ export const auth = {
     },
     registerSuccess(state) {
       state.status.loggedIn = false;
+      localStorage.setItem("user", JSON.stringify(user));
     },
     registerFailure(state) {
       state.status.loggedIn = false;

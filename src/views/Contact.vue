@@ -85,22 +85,10 @@
       <hr />
       <ul class="social-media-list">
         <li>
-          <a
-            href="https://github.com/HaniJar"
-            target="_blank"
-            class="contact-icon"
-          >
-            <i class="fab fa-github" aria-hidden="true"></i
-          ></a>
+          <i class="fab fa-github" aria-hidden="true"></i>
         </li>
         <li>
-          <a
-            href="https://codepen.io/HaniJar"
-            target="_blank"
-            class="contact-icon"
-          >
-            <i class="fab fa-codepen" aria-hidden="true"></i
-          ></a>
+          <i class="fab fa-codepen" aria-hidden="true"></i>
         </li>
       </ul>
       <hr />

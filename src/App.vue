@@ -20,8 +20,7 @@ export default {
   background-size: cover;
   object-fit: cover;
   z-index: 1;
-
-  height: 100vh !important;
+  height: 180vh !important;
 }
 
 #nav {

@@ -1,5 +1,10 @@
 <template>
-  <section id="shop">
+  <section id="prods">
+    <span
+      v-show="loading"
+      class="spinner-border spinner-border-sm"
+      style="width: 50px; height: 50px; color: white"
+    ></span>
     <div class="container" v-if="product">
       <div class="row">
         <div class="col">
@@ -8,7 +13,7 @@
       </div>
       <br /><br />
       <div class="row">
-        <div class="col-4">
+        <div class="col-6">
           <select
             v-model="selected"
             class="form-select"
@@ -20,7 +25,7 @@
             <option value="Pokémon">Pokémon</option>
           </select>
         </div>
-        <div class="col-4">
+        <div class="col-6">
           <form class="d-flex">
             <input
               class="form-control me-2"
@@ -31,7 +36,7 @@
             />
           </form>
         </div>
-        <br /><br />
+        <br /><br /><br />
         <div class="col-4"></div>
       </div>
       <div class="row">
@@ -62,10 +67,18 @@
                 <span class="fw-bold fs-2">R{{ products.price }}</span>
               </div>
               <div class="text-center">
+                <input
+                  type="number"
+                  class=""
+                  value="1"
+                  min="1"
+                  :id="`qty${i}`"
+                />
+                <br /><br />
                 <button
                   type="button"
                   class="btn btncolor"
-                  @click="addToCart(products._id)"
+                  @click="addToCart(product, i)"
                 >
                   Add to cart
                 </button>
@@ -99,6 +112,7 @@ export default {
   },
   methods: {},
   mounted() {
+    this.loading = true;
     fetch("https://final-backend1.herokuapp.com/products", {
       method: "GET",
       headers: {
@@ -108,6 +122,7 @@ export default {
       .then((response) => response.json())
       .then((json) => {
         this.product = json;
+        this.loading = false;
         if (localStorage.getItem("jwt")) {
           fetch("https://final-backend1.herokuapp.com/users/", {
             method: "GET",
@@ -118,9 +133,9 @@ export default {
           })
             .then((response) => response.json())
             .then((json) => {
-              if (json.isadmin == true) {
+              if (json.admin == true) {
                 alert("You are admin");
-                this.isadmin = json.isadmin;
+                this.admin = json.admin;
               }
             })
             .catch((err) => {
@@ -167,11 +182,11 @@ export default {
 .else {
   min-height: 100vh;
   font-family: Roboto, Arial;
-  color: #adafb6;
+  color: #ffffff;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: rgba(249, 251, 255, 0.6);
+  background: rgb(255, 255, 255);
 }
 /* .card{
     width: 356px !important;
@@ -225,14 +240,14 @@ export default {
 }
 
 .boxes .box > div {
-  background: #5c8df6;
+  background: #ffffff;
   --translateZ: 15.5px;
   --rotateY: 0deg;
   --rotateX: 0deg;
   position: absolute;
   width: 100%;
   height: 100%;
-  background: #5c8df6;
+  background: #ffffff;
   top: auto;
   right: auto;
   bottom: auto;
@@ -246,15 +261,15 @@ export default {
 .boxes .box > div:nth-child(1) {
   top: 0;
   left: 0;
-  background: #5c8df6;
+  background: #ffffff;
 }
 .boxes .box > div:nth-child(2) {
-  background: #145af2;
+  background: #ffffff;
   right: 0;
   --rotateY: 90deg;
 }
 .boxes .box > div:nth-child(3) {
-  background: #447cf5;
+  background: #ffffff;
   --rotateX: -90deg;
 }
 .boxes .box > div:nth-child(4) {
@@ -325,7 +340,7 @@ export default {
 }
 
 .cart {
-  background-color: #003459;
+  background-color: #2e0b28;
   float: right;
   color: white;
   border-radius: 300px;
@@ -336,7 +351,7 @@ export default {
 
 .cart:hover {
   transform: scale(1.1);
-  color: white;
+  color: rgb(0, 0, 0);
 }
 .container {
   text-align: center;
@@ -346,17 +361,17 @@ export default {
 }
 
 .btncolor {
-  background-color: #003459;
+  background-color: rgb(221, 12, 12);
   border-radius: 55555px;
   padding: 1rem 2rem !important;
-  color: #ffff;
+  color: rgb(0, 0, 0);
   margin-bottom: 2rem;
 }
 .btn-danger,
 .btn-warning {
   border-radius: 55555px;
   padding: 1rem 2rem !important;
-  color: #ffff;
+  color: rgb(0, 0, 0);
   margin-bottom: 2rem;
 }
 
@@ -367,7 +382,7 @@ export default {
 .parent {
   height: 300px;
   display: flex;
-  border: 2px solid yellow;
+  border: 2px solid rgb(0, 0, 0);
 }
 
 .child {
@@ -379,6 +394,6 @@ export default {
 }
 
 .icon-color {
-  color: #1f38fa;
+  color: #000000;
 }
 </style>
