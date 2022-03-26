@@ -152,7 +152,7 @@ export default {
 .form-control,
 textarea {
   max-width: 400px;
-  background-color: #000;
+  background-color: rgba(255, 255, 255, 0.692);
   color: #fff;
   letter-spacing: 1px;
 }
@@ -202,29 +202,34 @@ textarea {
 .contact-text {
   font: 300 18px "Lato", sans-serif;
   letter-spacing: 1.9px;
-  color: #bbb;
+  color: rgb(0, 0, 0);
+  font-weight: 600;
 }
 
 .place {
   margin-left: 62px;
+  color: rgb(0, 0, 0);
 }
 
 .phone {
   margin-left: 56px;
+  color: red;
 }
 
 .gmail {
   margin-left: 53px;
+  color: rgb(0, 0, 0);
 }
 
 .contact-text a {
-  color: #bbb;
+  color: rgb(0, 0, 0) !important;
   text-decoration: none;
   transition-duration: 0.2s;
+  font-weight: 600;
 }
 
 .contact-text a:hover {
-  color: #fff;
+  color: rgb(0, 0, 0);
   text-decoration: none;
 }
 
@@ -271,7 +276,7 @@ textarea {
 }
 
 .social-media-list li:hover {
-  background-color: #fff;
+  background-color: rgb(7, 7, 7);
 }
 
 .social-media-list li:hover:after {
@@ -286,9 +291,10 @@ textarea {
 
 .copyright {
   font: 200 14px "Oswald", sans-serif;
-  color: #555;
+  color: rgb(0, 0, 0);
   letter-spacing: 1px;
   text-align: center;
+  font-weight: 600;
 }
 
 hr {
@@ -363,5 +369,15 @@ hr {
   .send-button {
     width: 99%;
   }
+}
+
+.fa-map-marker:before {
+  color: rgb(218, 5, 5);
+}
+.fa-phone:before {
+  color: rgb(218, 5, 5);
+}
+.fa-envelope:before {
+  color: rgb(218, 5, 5);
 }
 </style>

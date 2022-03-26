@@ -3,6 +3,7 @@
     <span
       v-show="loading"
       class="spinner-border spinner-border-sm"
+      id="spin"
       style="width: 50px; height: 50px; color: white"
     ></span>
     <div class="container" v-if="product">
@@ -105,8 +106,7 @@ export default {
     return {
       product: null,
       search: "",
-      isModalVisible: false,
-      isadmin: false,
+      loading: false,
       selected: "",
     };
   },
@@ -395,5 +395,9 @@ export default {
 
 .icon-color {
   color: #000000;
+}
+
+#spin {
+  text-align: center;
 }
 </style>

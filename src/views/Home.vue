@@ -1,12 +1,14 @@
 <template>
-  <div>
+  <section>
     <div class="header-blue">
       <div class="container hero">
+        <h1 id="homee" style="color: white">WELCOME TO HANIAH'S POKÉMON</h1>
+        <p id="text">Make sure to check out our cool stuff!</p>
         <div class="row">
           <div
             class="col-md-5 col-lg-2 offset-lg-1 offset-xl-0 d-lg-block phone-holder"
           >
-            <div class="iphone-mockup">
+            <div class="poke-mockup">
               <img src="" class="device" />
             </div>
           </div>
@@ -20,14 +22,14 @@
           <div
             class="col-md-5 col-lg-2 offset-lg-1 offset-xl-0 d-lg-block phone-holder"
           >
-            <div class="iphone-mockup">
+            <div class="poke-mockup">
               <img src="" class="device" />
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
+  </section>
 </template>
 
 <script>
@@ -40,7 +42,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 @media (min-width: 768px) {
   .col-12 {
     height: 100;
@@ -128,14 +130,14 @@ export default {
 .header-blue .phone-holder {
   text-align: right;
 }
-.header-blue div.iphone-mockup {
+.header-blue div.poke-mockup {
   position: relative;
   max-width: 300px;
   margin: 20px;
   display: inline-block;
 }
 
-.header-blue .iphone-mockup img.device {
+.header-blue .poke-mockup img.device {
   width: 270%;
   height: auto;
 }
@@ -143,7 +145,7 @@ export default {
   align-items: center;
   padding-top: 137px;
 }
-.header-blue .iphone-mockup .screen {
+.header-blue .poke-mockup .screen {
   position: absolute;
   width: 88%;
   height: 77%;
@@ -157,7 +159,7 @@ export default {
   background-position: center;
 }
 
-.header-blue .iphone-mockup .screen:before {
+.header-blue .poke-mockup .screen:before {
   content: "";
   background-color: #444;
   position: absolute;
@@ -167,5 +169,16 @@ export default {
   right: -60%;
   transform: rotate(-19deg);
   opacity: 0.2;
+}
+#homee {
+  text-align: center;
+  font-weight: bold;
+  margin-right: 155px;
+}
+#text {
+  text-align: center;
+  font-weight: 900;
+  margin-right: 155px;
+  color: rgb(209, 15, 15);
 }
 </style>

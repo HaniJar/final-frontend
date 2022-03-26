@@ -1,7 +1,7 @@
 <template>
   <div class="containers">
     <div class="column">
-      <h1 id="yeh" style="color: white">WELCOME BACK PLEASE LOG IN</h1>
+      <h1 id="yeh" style="color: white">PLEASE LOG IN</h1>
       <div id="login" class="mt-5">
         <img
           id="profile-img"
@@ -147,5 +147,12 @@ export default {
 }
 #yeh {
   text-align: center;
+}
+.mt-5 {
+  @media only screen and (max-width: 600px) {
+    body {
+      background-color: lightblue;
+    }
+  }
 }
 </style>

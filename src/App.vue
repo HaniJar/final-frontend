@@ -2,25 +2,30 @@
   <div id="nav">
     <Navbar />
   </div>
+  <Footer />
   <router-view />
 </template>
 
 <script>
 import Navbar from "@/components/Navbar.vue";
+import Footer from "@/components/Footer.vue";
 export default {
   components: {
     Navbar,
+    Footer,
   },
 };
 </script>
 <style>
 #app {
-  background-color: black;
+  background: url(https://i.postimg.cc/4xcz7Kd1/bulby.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   object-fit: cover;
   z-index: 1;
-  height: 180vh !important;
+  height: 100vh !important;
+  margin: 0;
+  padding: 0;
 }
 
 #nav {
