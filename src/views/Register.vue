@@ -48,7 +48,7 @@ export default {
   methods: {
     register() {
       console.log(this.name, this.email, this.contact, this.password);
-      fetch("https://pinkay-and-kuro-final.herokuapp.com/users/signup", {
+      fetch("https://final-backend1.herokuapp.com//signup", {
         method: "POST",
         body: JSON.stringify({
           name: this.name,
